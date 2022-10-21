@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Biblioteca.Migrations
 {
-    public partial class VersaoInicial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,7 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Tipo = table.Column<string>(type: "longtext", nullable: true)
+                    Tipo = table.Column<string>(type: "varchar(10)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -34,11 +34,11 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Cpf = table.Column<string>(type: "longtext", nullable: true)
+                    Cpf = table.Column<string>(type: "varchar(11)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                    Nome = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Senha = table.Column<string>(type: "longtext", nullable: true)
+                    Senha = table.Column<string>(type: "varchar(8)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PedidoId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -54,15 +54,15 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Rua = table.Column<string>(type: "longtext", nullable: true)
+                    Rua = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Numero = table.Column<string>(type: "longtext", nullable: true)
+                    Numero = table.Column<string>(type: "varchar(10)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Bairro = table.Column<string>(type: "longtext", nullable: true)
+                    Bairro = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cidade = table.Column<string>(type: "longtext", nullable: true)
+                    Cidade = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cep = table.Column<string>(type: "longtext", nullable: true)
+                    Cep = table.Column<string>(type: "varchar(10)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -86,6 +86,7 @@ namespace Biblioteca.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Quantidade = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Subtotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    LivrosId = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -140,7 +141,7 @@ namespace Biblioteca.Migrations
                     Preco = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PedidoId = table.Column<int>(type: "int", nullable: false)
+                    PedidoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,8 +150,7 @@ namespace Biblioteca.Migrations
                         name: "FK_Livros_Pedidos_PedidoId",
                         column: x => x.PedidoId,
                         principalTable: "Pedidos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

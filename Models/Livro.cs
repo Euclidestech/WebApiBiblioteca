@@ -32,9 +32,6 @@ namespace Biblioteca.Models
     public string Status { get; set; }
 
     public Pedido Pedido { get; set; }
-  [Required]
-    public int PedidoId { get; set; }
-  }
 
 
-}
+}}

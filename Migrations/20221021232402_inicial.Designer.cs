@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    [Migration("20221001230240_AtualizacaoTipos")]
-    partial class AtualizacaoTipos
+    [Migration("20221021232402_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,7 +79,7 @@ namespace Biblioteca.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("PedidoId")
+                    b.Property<int?>("PedidoId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Preco")
@@ -100,6 +100,9 @@ namespace Biblioteca.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("LivrosId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Quantidade")
@@ -189,9 +192,7 @@ namespace Biblioteca.Migrations
                 {
                     b.HasOne("Biblioteca.Models.Pedido", "Pedido")
                         .WithMany("Livros")
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PedidoId");
 
                     b.Navigation("Pedido");
                 });

@@ -15,6 +15,8 @@ namespace Biblioteca.Models
         [Required]
         public decimal Subtotal { get; set; }
 
+        public int LivrosId { get; set; }
+
         public List<Livro> Livros { get; set; }
         public Usuario Usuario { get; set; }
 

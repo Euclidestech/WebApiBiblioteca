@@ -1,8 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.Data;
+using Biblioteca.Servicos;
+using Biblioteca.Repositorio;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<LivroServico>();
+builder.Services.AddScoped<LivroRepositorio>();
 
 builder.Services.AddDbContext<ContextoBD>(
   options =>

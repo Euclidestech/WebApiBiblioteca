@@ -32,5 +32,24 @@ namespace Biblioteca.Controllers{
             return _livroServico.ListarLivros();
 
         }
+
+        [HttpGet("{id}")]
+        public LivroResposta GetLivro([FromRoute] int id)
+        {
+            return _livroServico.BuscarId(id);
+        }
+        [HttpDelete("{id:int}")]
+        public void DeleteLivro([FromRoute]int id)
+        {
+            _livroServico.RemoverLivro(id);
+        }
+
+        [HttpPut("{id:int}")]
+        public LivroResposta PutLivro
+        ([FromRoute]int id, [FromBody] LivroCriarAtualizarRequisicao livroEditado)
+        {
+           return _livroServico.AtualizarLivro(id,livroEditado); 
+        }
+
     }
 }

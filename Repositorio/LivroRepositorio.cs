@@ -28,6 +28,21 @@ namespace Biblioteca.Repositorio
     {
         return _contexto.Livros.ToList();
     }
+
+    public Livro BuscarId(int id)
+    {
+      return _contexto.Livros.FirstOrDefault(livro => livro.Id == id);
+    }
+    public void RemoverLivro(Livro livro)
+    {
+      _contexto.Remove(livro);
+      _contexto.SaveChanges();
+    }
+
+    public void AtualizarLivro()
+    {
+      _contexto.SaveChanges();
+    }
   }
   
 }

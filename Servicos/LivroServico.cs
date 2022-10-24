@@ -21,14 +21,9 @@ namespace Biblioteca.Servicos
     public LivroResposta CriarLivro(LivroCriarAtualizarRequisicao novoLivro)
     {
       var livro = new Livro();
-      livro.Nome = novoLivro.Nome;
-      livro.Categoria = novoLivro.Categoria;
-      livro.Autor = novoLivro.Autor;
-      livro.Preco = novoLivro.Preco;
-      livro.Status = novoLivro.Status;
+     ConverterRequisicaoModelo(novoLivro,livro);
 
       _livroRepositorio.CriarLivro(livro);
-
 
       var livroResposta = ConverteModeloResposta(livro);
       return livroResposta;
@@ -51,6 +46,53 @@ namespace Biblioteca.Servicos
 
       }
       return livroRespostas;
+
+    }
+
+    public LivroResposta BuscarId(int id)
+    {
+      var livro = _livroRepositorio.BuscarId(id);
+
+      return ConverteModeloResposta(livro);
+
+    }
+
+    public void RemoverLivro(int id)
+    {
+      var livro = _livroRepositorio.BuscarId(id);
+      if(livro is null)
+      {
+        return ;
+      }
+      _livroRepositorio.RemoverLivro(livro);
+    }
+    public LivroResposta AtualizarLivro
+    (int id, LivroCriarAtualizarRequisicao LivroEditado)
+    {
+      var livro = _livroRepositorio.BuscarId(id);
+      if(livro is null)
+      {
+        return null;
+      }
+      ConverterRequisicaoModelo(LivroEditado , livro);
+
+      _livroRepositorio.AtualizarLivro();
+
+      return ConverteModeloResposta(livro);
+
+    }
+
+
+
+    
+    private void ConverterRequisicaoModelo
+    (LivroCriarAtualizarRequisicao requisicao , Livro modelo)
+    {
+      modelo.Nome =requisicao.Nome;
+      modelo.Categoria =requisicao.Categoria;
+      modelo.Autor =requisicao.Autor;
+      modelo.Preco =requisicao.Preco;
+      modelo.Status =requisicao.Status;
 
     }
     private LivroResposta ConverteModeloResposta(Livro modelo)

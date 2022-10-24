@@ -25,6 +25,7 @@ namespace Biblioteca.Models
     [Required]
     public DateTime Ano { get; set; }
     [Required]
+    [Column(TypeName = "decimal(13,2)")]
     public decimal Preco { get; set; }
 
     [Required]

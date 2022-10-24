@@ -16,10 +16,18 @@ namespace Biblioteca.Repositorio
     {
       _contexto = contexto;
     }
-    public void CriarLivro(Livro livro)
+    public Livro CriarLivro(Livro livro)
     {
       _contexto.Livros.Add(livro);
       _contexto.SaveChanges();
+
+      return livro;
+    }
+
+    public List<Livro> ListarLivros()
+    {
+        return _contexto.Livros.ToList();
     }
   }
+  
 }

@@ -20,9 +20,16 @@ namespace Biblioteca.Controllers{
         }
 
         [HttpPost]
-        public void PostLivro([FromBody]LivroCriarAtualizarRequisicao novoLivro)
+        public LivroResposta PostLivro([FromBody]LivroCriarAtualizarRequisicao novoLivro)
         {
-            _livroServico.CriarLivro(novoLivro);
+            return _livroServico.CriarLivro(novoLivro);
+
+        }
+
+        [HttpGet]
+        public List<LivroResposta> GetLivros()
+        {
+            return _livroServico.ListarLivros();
 
         }
     }

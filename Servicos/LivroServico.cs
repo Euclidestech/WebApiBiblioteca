@@ -6,6 +6,7 @@ using Biblioteca.Dtos.Livro;
 using Biblioteca.Models;
 using Biblioteca.Repositorio;
 using Microsoft.AspNetCore.Mvc;
+using Mapster;
 
 namespace Biblioteca.Servicos
 {
@@ -13,93 +14,87 @@ namespace Biblioteca.Servicos
   public class LivroServico
   {
 
-    private LivroRepositorio _livroRepositorio;
+    private readonly LivroRepositorio _livroRepositorio;
     public LivroServico([FromServices] LivroRepositorio repositorio)
     {
       _livroRepositorio = repositorio;
     }
     public LivroResposta CriarLivro(LivroCriarAtualizarRequisicao novoLivro)
     {
-      var livro = new Livro();
-     ConverterRequisicaoModelo(novoLivro,livro);
+
+      var livro = novoLivro.Adapt<Livro>();
 
       _livroRepositorio.CriarLivro(livro);
 
-      var livroResposta = ConverteModeloResposta(livro);
+      var livroResposta = livro.Adapt<LivroResposta>();
       return livroResposta;
-
 
     }
 
     public List<LivroResposta> ListarLivros()
     {
       var Livros = _livroRepositorio.ListarLivros();
-
-      List<LivroResposta> livroRespostas = new();
-
-      foreach (var livro in Livros)
-      {
-        var livroResposta = ConverteModeloResposta(livro);
-
-        livroRespostas.Add(livroResposta);
-
-
-      }
+       var livroRespostas = Livros.Adapt<List<LivroResposta>>();
+    
       return livroRespostas;
 
     }
 
     public LivroResposta BuscarId(int id)
     {
-      var livro = _livroRepositorio.BuscarId(id);
+      var livro = BuscaPeloId(id,false);
 
-      return ConverteModeloResposta(livro);
+      return livro.Adapt<LivroResposta>();
 
     }
 
     public void RemoverLivro(int id)
     {
-      var livro = _livroRepositorio.BuscarId(id);
-      if(livro is null)
-      {
-        return ;
-      }
+      var livro = BuscaPeloId(id);
+
       _livroRepositorio.RemoverLivro(livro);
     }
     public LivroResposta AtualizarLivro
     (int id, LivroCriarAtualizarRequisicao LivroEditado)
     {
-      var livro = _livroRepositorio.BuscarId(id);
-      if(livro is null)
-      {
-        return null;
-      }
-      ConverterRequisicaoModelo(LivroEditado , livro);
+      var livro = BuscaPeloId(id);
 
+    //  ConverterRequisicaoModelo(LivroEditado, livro);
+      LivroEditado.Adapt(livro);
       _livroRepositorio.AtualizarLivro();
 
-      return ConverteModeloResposta(livro);
+      return livro.Adapt<LivroResposta>(); //ConverteModeloResposta(livro);
+
+    }
+    private Livro BuscaPeloId(int id,bool tracking = true)
+    {
+      var livro = _livroRepositorio.BuscarId(id,tracking);
+      if (livro is null)
+      {
+        throw new Exception("Livro não encontrado!");
+      }
+      return livro;
 
     }
 
 
 
-    
+/*
     private void ConverterRequisicaoModelo
-    (LivroCriarAtualizarRequisicao requisicao , Livro modelo)
+    (LivroCriarAtualizarRequisicao requisicao, Livro modelo)
     {
-      modelo.Nome =requisicao.Nome;
-      modelo.Categoria =requisicao.Categoria;
-      modelo.Autor =requisicao.Autor;
-      modelo.Preco =requisicao.Preco;
-      modelo.Status =requisicao.Status;
+      modelo.Nome = requisicao.Nome;
+      modelo.Categoria = requisicao.Categoria;
+      modelo.Autor = requisicao.Autor;
+      modelo.Preco = requisicao.Preco;
+      modelo.Status = requisicao.Status;
 
     }
     private LivroResposta ConverteModeloResposta(Livro modelo)
 
     {
       var livroResposta = new LivroResposta();
-      livroResposta.id = modelo.Id;
+      livroResposta.Id = modelo.Id;
       livroResposta.Nome = modelo.Nome;
       livroResposta.Categoria = modelo.Categoria;
       livroResposta.Autor = modelo.Autor;
@@ -107,6 +102,7 @@ namespace Biblioteca.Servicos
       livroResposta.Status = modelo.Status;
 
       return livroResposta;
-    }
+    }*/
+    
   }
 }

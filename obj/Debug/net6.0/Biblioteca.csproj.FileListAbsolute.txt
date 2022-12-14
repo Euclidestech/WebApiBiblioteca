@@ -33,3 +33,5 @@ D:\Biblioteca\obj\Debug\net6.0\refint\Biblioteca.dll
 D:\Biblioteca\obj\Debug\net6.0\Biblioteca.pdb
 D:\Biblioteca\obj\Debug\net6.0\Biblioteca.genruntimeconfig.cache
 D:\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll
+D:\Biblioteca\bin\Debug\net6.0\Mapster.dll
+D:\Biblioteca\bin\Debug\net6.0\Mapster.Core.dll

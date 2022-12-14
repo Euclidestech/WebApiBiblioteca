@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Biblioteca.Data;
 using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Repositorio
 {
   public class LivroRepositorio
   {
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
 
     public LivroRepositorio([FromServices] ContextoBD contexto)
     {
@@ -26,12 +27,14 @@ namespace Biblioteca.Repositorio
 
     public List<Livro> ListarLivros()
     {
-        return _contexto.Livros.ToList();
+      return _contexto.Livros.AsNoTracking().ToList();
     }
 
-    public Livro BuscarId(int id)
+    public Livro BuscarId(int id, bool tracking = true)
     {
-      return _contexto.Livros.FirstOrDefault(livro => livro.Id == id);
+      return (tracking) ?
+       _contexto.Livros.FirstOrDefault(livro => livro.Id == id) :
+          _contexto.Livros.AsNoTracking().FirstOrDefault(livro => livro.Id == id);
     }
     public void RemoverLivro(Livro livro)
     {
@@ -44,5 +47,5 @@ namespace Biblioteca.Repositorio
       _contexto.SaveChanges();
     }
   }
-  
+
 }

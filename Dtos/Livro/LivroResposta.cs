@@ -7,7 +7,7 @@ namespace Biblioteca.Dtos.Livro
 {
     public class LivroResposta
     {
-        public int id {get; set;}
+        public int Id {get; set;}
          public string Nome { get; set; }
         public string Categoria { get; set; }
         public string Autor { get; set; }

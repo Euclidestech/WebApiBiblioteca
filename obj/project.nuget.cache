@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UVOq109BligL+nw+xCagHkcHJaf+6pdGH0xt1IPmTSzLWZxg4lIox7wjCI2QdyVNbQ0AG8VGjK4sfWh35gmsxQ==",
+  "dgSpecHash": "+7DB31au0eIvRxhdC9VTRv+Stq5hfcJRP2cOzWE0+pO9CYS93xYallM82rvKhsfQeOmoGbd6VfRE0pZirt301Q==",
   "success": true,
   "projectFilePath": "D:\\Biblioteca\\Biblioteca.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\eucli\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\eucli\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\eucli\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
     "C:\\Users\\eucli\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",

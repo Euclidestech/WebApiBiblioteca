@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Models
 {
+
+  [Index(nameof(Cpf),IsUnique = true)]
   public class Usuario
   {
     [Required]
@@ -24,8 +27,8 @@ namespace Biblioteca.Models
     public Endereco Endereco { get; set; }
 
     public List<Pedido> Pedidos { get; set; }
-    [Required]
-    public int PedidoId { get; set; }
+   // [Required]
+    //public int PedidoId { get; set; }
     public List<Perfil> Perfils  { get; set; }
     
     

@@ -35,3 +35,4 @@ D:\Biblioteca\obj\Debug\net6.0\Biblioteca.genruntimeconfig.cache
 D:\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll
 D:\Biblioteca\bin\Debug\net6.0\Mapster.dll
 D:\Biblioteca\bin\Debug\net6.0\Mapster.Core.dll
+D:\Biblioteca\bin\Debug\net6.0\BCrypt.Net-Next.dll

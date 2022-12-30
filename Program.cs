@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<LivroServico>();
 builder.Services.AddScoped<LivroRepositorio>();
+builder.Services.AddScoped<UsuarioServico>();
+builder.Services.AddScoped<UsuarioRepositorio>();
 
 builder.Services.AddDbContext<ContextoBD>(
   options =>

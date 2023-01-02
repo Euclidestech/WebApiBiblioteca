@@ -10,6 +10,8 @@ builder.Services.AddScoped<LivroServico>();
 builder.Services.AddScoped<LivroRepositorio>();
 builder.Services.AddScoped<UsuarioServico>();
 builder.Services.AddScoped<UsuarioRepositorio>();
+builder.Services.AddScoped<PedidoServico>();
+builder.Services.AddScoped<PedidoRepositorio>();
 
 builder.Services.AddDbContext<ContextoBD>(
   options =>

@@ -34,14 +34,18 @@ namespace Biblioteca.Repositorio
     {
       return _contexto.Usuarios
       .Include(usuario => usuario.Endereco)
+      .Include(usuario => usuario.Perfis)
       .AsNoTracking().ToList();
     }
     public Usuario BuscarPeloId(int id , bool tracking = true)
     {
       return tracking ?
       _contexto.Usuarios.Include(user => user.Endereco)
+      .Include(user => user.Perfis)
       .FirstOrDefault(user => user.Id == id):
+      
       _contexto.Usuarios.Include(user => user.Endereco)
+      .Include(user => user.Perfis)
       .AsNoTracking().FirstOrDefault(user => user.Id == id);
     }
 

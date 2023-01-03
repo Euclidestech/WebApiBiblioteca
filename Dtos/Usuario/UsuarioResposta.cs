@@ -12,6 +12,8 @@ namespace Biblioteca.Dtos.Usuario
     public string Cpf { get; set; }
     public EnderecoResposta Endereco { get; set; }
 
+    public List<PerfilResposta> Perfis{get;set;}
+
   }
   public class EnderecoResposta
   {
@@ -21,8 +23,11 @@ namespace Biblioteca.Dtos.Usuario
     public string Bairro { get; set; }
     public string Cidade { get; set; }
     public string Cep { get; set; }
+  }
 
-    
-
+  public class PerfilResposta
+  {
+    public int id { get; set; }
+    public string Tipo { get; set; }
   }
 }

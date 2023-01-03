@@ -90,6 +90,21 @@ namespace Biblioteca.Controllers
           return NotFound(e.Message);
         }
       }
+/*
+      [HttpGet("{usuarioId:int}/perfil/{perfilId:id:int}")]
+      public ActionResult<UsuarioResposta> GetUsuarioPerfil([FromRoute] int usuarioId,
+      [FromRoute] int perfilId){
+        try{
+
+          return Ok(_usuarioServico.AtribuirPerfil(usuarioId,perfilId));
+
+        }catch(BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }catch(Exception e){
+          return NotFound(e.Message);
+        }
+      }*/
 
   }
 }

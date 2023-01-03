@@ -11,7 +11,8 @@ namespace Biblioteca.Models
     [Required]
     public int Id { get; set; }
     [Required]
-    public decimal Quantidade { get; set; }
+    
+    public int Quantidade { get; set; }
     [Required]
     public decimal Subtotal { get; set; }
 

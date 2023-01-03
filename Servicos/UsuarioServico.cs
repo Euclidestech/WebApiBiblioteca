@@ -14,9 +14,13 @@ namespace Biblioteca.Servicos
   public class UsuarioServico
   {
     private readonly UsuarioRepositorio _usuarioRepositorio;
-    public UsuarioServico([FromServices] UsuarioRepositorio repositorio)
+    private readonly PerfilRepositorio _perfilRepositorio;
+    public UsuarioServico([FromServices] UsuarioRepositorio repositorio,
+    [FromServices] PerfilRepositorio pRepositorio
+    )
     {
       _usuarioRepositorio = repositorio;
+      _perfilRepositorio = pRepositorio;
     }
 
 
@@ -85,5 +89,23 @@ namespace Biblioteca.Servicos
       return usuasrioResposta;
 
     }
+
+    public UsuarioResposta AtribuirPerfil(int usuarioId, int perfilId)
+    {
+      var usuario = BuscarPeloId(usuarioId);
+
+      var perfil = _perfilRepositorio.BuscarPefilPeloId(perfilId);
+      if(perfil is null)
+      {
+        throw new Exception("Perfil nao encontrado");
+      }
+      usuario.Perfis.Add(perfil);
+      _usuarioRepositorio.EditarUsuario();
+
+      return usuario.Adapt<UsuarioResposta>();
+
+    }
+
+    
   }
 }

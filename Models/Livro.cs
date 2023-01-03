@@ -32,8 +32,8 @@ namespace Biblioteca.Models
     [Column(TypeName = "text")]
     public string Status { get; set; }
 
+    
     public List<Pedido> Pedidos { get; set; }
-    //public List<Livro> Livros { get; set; }
-
+   public Usuario Usuario{get; set;}
   }
 }

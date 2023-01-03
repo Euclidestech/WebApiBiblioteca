@@ -39,8 +39,10 @@ namespace Biblioteca.Repositorio
     public Usuario BuscarPeloId(int id , bool tracking = true)
     {
       return tracking ?
-      _contexto.Usuarios.Include(user => user.Endereco).FirstOrDefault(user => user.Id == id):
-      _contexto.Usuarios.Include(user => user.Endereco).AsNoTracking().FirstOrDefault(user => user.Id == id);
+      _contexto.Usuarios.Include(user => user.Endereco)
+      .FirstOrDefault(user => user.Id == id):
+      _contexto.Usuarios.Include(user => user.Endereco)
+      .AsNoTracking().FirstOrDefault(user => user.Id == id);
     }
 
     public void ExcluirUsuario(Usuario usuario)

@@ -3,6 +3,7 @@ using System;
 using Biblioteca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    partial class ContextoBDModelSnapshot : ModelSnapshot
+    [Migration("20230103000610_atualizacao2")]
+    partial class atualizacao2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,12 +86,12 @@ namespace Biblioteca.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int?>("usuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("usuarioId");
 
                     b.ToTable("Livros");
                 });
@@ -133,7 +135,7 @@ namespace Biblioteca.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Perfis");
+                    b.ToTable("Perfils");
                 });
 
             modelBuilder.Entity("Biblioteca.Models.Usuario", b =>
@@ -190,11 +192,11 @@ namespace Biblioteca.Migrations
 
             modelBuilder.Entity("Biblioteca.Models.Livro", b =>
                 {
-                    b.HasOne("Biblioteca.Models.Usuario", "Usuario")
+                    b.HasOne("Biblioteca.Models.Usuario", "usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("usuarioId");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("Biblioteca.Models.Pedido", b =>

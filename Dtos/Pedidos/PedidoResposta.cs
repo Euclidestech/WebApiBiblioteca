@@ -12,9 +12,9 @@ namespace Biblioteca.Dtos.Pedidos
     public int Id { get; set; }
 
     public decimal Quantidade { get; set; }
-    public int LivrosId { get; set; }
-    public LivroResposta Livros { get; set; }
-    public int UsuarioId { get; set; }
-    public UsuarioResposta Usuarios { get; set; }
+    public int LivroId { get; set; }
+    public LivroResposta Livro { get; set; }
+    public int UsuarioId{ get; set; }
+    public UsuarioResposta Usuario{ get; set; }
   }
 }

@@ -20,7 +20,7 @@ namespace Biblioteca.Data
     public DbSet<Livro> Livros { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
-    public DbSet<Perfil> Perfils { get; set; }
+    public DbSet<Perfil> Perfis { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
 
   }

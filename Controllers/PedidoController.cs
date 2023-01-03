@@ -34,5 +34,42 @@ namespace Biblioteca.Controllers
       }
 
     }
+    [HttpGet]
+    public ActionResult<List<PedidoResposta>> GetPedidos()
+    {
+      return Ok(_pedidoServico.ListarPedidos());
+    }
+
+    [HttpGet("{id:int}")]
+    public ActionResult<PedidoResposta> GetPedido([FromRoute] int id)
+
+    {
+      try
+      {
+        return Ok(_pedidoServico.BuscarPedidoPeloId(id));
+
+      }catch(Exception e)
+      {
+        return NotFound(e.Message);
+      }
+    }
+
+    [HttpDelete ("{id:int}")]
+    public ActionResult DeletePedido([FromRoute] int id)
+    {
+      try{
+        _pedidoServico.RemoverPedido(id);
+        return NoContent();
+      }catch(BadHttpRequestException e)
+      {
+        return BadRequest(e.Message);
+
+      }
+      catch(Exception e)
+      {
+        return NotFound(e.Message);
+      }
+
+    }
   }
 }

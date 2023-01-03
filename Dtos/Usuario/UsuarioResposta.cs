@@ -22,5 +22,7 @@ namespace Biblioteca.Dtos.Usuario
     public string Cidade { get; set; }
     public string Cep { get; set; }
 
+    
+
   }
 }

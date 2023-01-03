@@ -15,12 +15,11 @@ namespace Biblioteca.Models
     [Required]
     public decimal Subtotal { get; set; }
 
-    public int LivrosId { get; set; }
+    public int LivroId { get; set; }
     public int UsuarioId { get; set; }
-
-    public Livro Livros { get; set; }
-    // public List<Livro> Livros { get; set; }
-    public Usuario Usuarios { get; set; }
+    public Livro Livro { get; set; }
+    public Usuario Usuario { get; set; }
+    
 
   }
 }

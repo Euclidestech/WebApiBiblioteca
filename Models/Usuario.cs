@@ -27,10 +27,11 @@ namespace Biblioteca.Models
     public Endereco Endereco { get; set; }
 
     public List<Pedido> Pedidos { get; set; }
-   // [Required]
-    //public int PedidoId { get; set; }
-    public List<Perfil> Perfils  { get; set; }
+    [Required]
+   
+    public List<Perfil> Perfis { get; set; }
     
+   // public int LivroId{get;set;}
     
   }
 }

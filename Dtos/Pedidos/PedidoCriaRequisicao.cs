@@ -8,7 +8,7 @@ namespace Biblioteca.Dtos.Pedidos
   public class PedidoCriaRequisicao
   {
     public decimal Quantidade { get; set; }
-    public int LivrosId { get; set; }
+    public int LivroId { get; set; }
     public int UsuarioId { get; set; }
   }
 }

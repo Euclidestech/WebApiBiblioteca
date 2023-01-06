@@ -29,6 +29,7 @@ namespace Biblioteca.Servicos
 
     public List<PedidoResposta> ListarPedidos(){
       var pedidos = _pedidoRepositorio.ListarPedidos();
+      
       return pedidos.Adapt<List<PedidoResposta>>();
 
     }

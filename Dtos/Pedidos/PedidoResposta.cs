@@ -16,5 +16,6 @@ namespace Biblioteca.Dtos.Pedidos
     public LivroResposta Livro { get; set; }
     public int UsuarioId { get; set; }
     public UsuarioResposta Usuario { get; set; }
+    
   }
 }

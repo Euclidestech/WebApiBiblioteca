@@ -27,7 +27,7 @@ namespace Biblioteca.Dtos.Usuario
 
   public class PerfilResposta
   {
-    public int id { get; set; }
+    public int Id { get; set; }
     public string Tipo { get; set; }
   }
 }

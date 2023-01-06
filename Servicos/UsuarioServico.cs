@@ -99,11 +99,29 @@ namespace Biblioteca.Servicos
       {
         throw new Exception("Perfil nao encontrado");
       }
+      if(usuario.Perfis.Exists(perfil => perfil.Id == perfilId))
+      {
+        throw new Exception("Perfil ja associado");
+      }
       usuario.Perfis.Add(perfil);
       _usuarioRepositorio.EditarUsuario();
 
       return usuario.Adapt<UsuarioResposta>();
 
+    }
+
+    public UsuarioResposta ExcluirPerfil(int usuarioId, int perfilId)
+    {
+      var usuario = BuscarPeloId(usuarioId);
+      if(!usuario.Perfis.Exists(perfil => perfil.Id == perfilId))
+      {
+        throw new BadHttpRequestException("Perfil nao encontardor");
+
+      }
+      usuario.Perfis.RemoveAll(perfil => perfil.Id == perfilId);
+
+      _usuarioRepositorio.EditarUsuario();
+      return usuario.Adapt<UsuarioResposta>();
     }
 
     

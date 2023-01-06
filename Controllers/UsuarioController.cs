@@ -90,9 +90,9 @@ namespace Biblioteca.Controllers
           return NotFound(e.Message);
         }
       }
-/*
-      [HttpGet("{usuarioId:int}/perfil/{perfilId:id:int}")]
-      public ActionResult<UsuarioResposta> GetUsuarioPerfil([FromRoute] int usuarioId,
+
+      [HttpPut("{usuarioId:int}/perfil/{perfilId:int}")]
+      public ActionResult<UsuarioResposta> PutUsuarioPerfil([FromRoute] int usuarioId,
       [FromRoute] int perfilId){
         try{
 
@@ -104,7 +104,24 @@ namespace Biblioteca.Controllers
         }catch(Exception e){
           return NotFound(e.Message);
         }
-      }*/
+      }
+       [HttpDelete("{usuarioId:int}/perfil/{perfilId:int}")]
+
+       public ActionResult<UsuarioResposta> DeletePerfil( [FromRoute] int usuarioId, int perfilId)
+       {
+        try{
+          return Ok(_usuarioServico.ExcluirPerfil(usuarioId, perfilId));
+        }catch ( BadHttpRequestException e)
+        {
+          return BadRequest(e.Message);
+        }catch(Exception e){
+          return NotFound(e.Message);
+
+        }
+
+       }
+
+
 
   }
 }

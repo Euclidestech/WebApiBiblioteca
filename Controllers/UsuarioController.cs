@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Biblioteca.Dtos.Usuario;
 using Biblioteca.Exececoes;
 using Biblioteca.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers
@@ -25,7 +26,7 @@ namespace Biblioteca.Controllers
       try
       {
         var usuarioResposta = _usuarioServico.CriarUsuario(novoUsuario);
-        return CreatedAtAction(nameof(GetUsuario),new {id = usuarioResposta.Id}, usuarioResposta);
+        return CreatedAtAction(nameof(GetUsuario), new { id = usuarioResposta.Id }, usuarioResposta);
       }
       catch (ExececaoCpfExistente e)
       {
@@ -41,85 +42,99 @@ namespace Biblioteca.Controllers
     }
 
     [HttpGet("{id:int}")]
-    public ActionResult <UsuarioResposta> GetUsuario([FromRoute] int id)
+    public ActionResult<UsuarioResposta> GetUsuario([FromRoute] int id)
     {
       try
       {
         return Ok(_usuarioServico.BuscarUsuarioPeloId(id));
 
-      }catch (Exception e)
+      }
+      catch (Exception e)
       {
         return NotFound(e.Message);
 
       }
 
     }
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id:int}")]
 
     public ActionResult DeleteUsuario([FromRoute] int id)
     {
       try
       {
-          _usuarioServico.ExcluirUsuario(id);
-          return NoContent();
-      }catch(Exception e)
+        _usuarioServico.ExcluirUsuario(id);
+        return NoContent();
+      }
+      catch (Exception e)
       {
         return NotFound(e.Message);
 
       }
-      
+
 
     }
 
     [HttpPut("{id:int}")]
     public ActionResult<UsuarioResposta>
       PutUsuario([FromRoute] int id, [FromBody] AtualizarRequisicao usuarioEditado)
+    {
+      try
       {
-        try
-        {
-          return Ok(_usuarioServico.EditarUsuario(id,usuarioEditado));
+        return Ok(_usuarioServico.EditarUsuario(id, usuarioEditado));
 
-        }catch(ExececaoCpfExistente e)
+      }
+      catch (ExececaoCpfExistente e)
 
-        {
-          return BadRequest(e.Message);
+      {
+        return BadRequest(e.Message);
 
-        }
-        catch(Exception e)
-        {
-          return NotFound(e.Message);
-        }
+      }
+      catch (Exception e)
+      {
+        return NotFound(e.Message);
+      }
+    }
+    [Authorize(Roles = "Administrador")]
+    [HttpPut("{usuarioId:int}/perfil/{perfilId:int}")]
+    public ActionResult<UsuarioResposta> PutUsuarioPerfil([FromRoute] int usuarioId,
+    [FromRoute] int perfilId)
+    {
+      try
+      {
+
+        return Ok(_usuarioServico.AtribuirPerfil(usuarioId, perfilId));
+
+      }
+      catch (BadHttpRequestException e)
+      {
+        return BadRequest(e.Message);
+      }
+      catch (Exception e)
+      {
+        return NotFound(e.Message);
+      }
+    }
+    [Authorize(Roles = "Administrador")]
+    [HttpDelete("{usuarioId:int}/perfil/{perfilId:int}")]
+
+    public ActionResult<UsuarioResposta> DeletePerfil([FromRoute] int usuarioId, int perfilId)
+    {
+      try
+      {
+        return Ok(_usuarioServico.ExcluirPerfil(usuarioId, perfilId));
+      }
+      catch (BadHttpRequestException e)
+      {
+        return BadRequest(e.Message);
+      }
+      catch (Exception e)
+      {
+        return NotFound(e.Message);
+
       }
 
-      [HttpPut("{usuarioId:int}/perfil/{perfilId:int}")]
-      public ActionResult<UsuarioResposta> PutUsuarioPerfil([FromRoute] int usuarioId,
-      [FromRoute] int perfilId){
-        try{
-
-          return Ok(_usuarioServico.AtribuirPerfil(usuarioId,perfilId));
-
-        }catch(BadHttpRequestException e)
-        {
-            return BadRequest(e.Message);
-        }catch(Exception e){
-          return NotFound(e.Message);
-        }
-      }
-       [HttpDelete("{usuarioId:int}/perfil/{perfilId:int}")]
-
-       public ActionResult<UsuarioResposta> DeletePerfil( [FromRoute] int usuarioId, int perfilId)
-       {
-        try{
-          return Ok(_usuarioServico.ExcluirPerfil(usuarioId, perfilId));
-        }catch ( BadHttpRequestException e)
-        {
-          return BadRequest(e.Message);
-        }catch(Exception e){
-          return NotFound(e.Message);
-
-        }
-
-       }
+    }
 
 
 

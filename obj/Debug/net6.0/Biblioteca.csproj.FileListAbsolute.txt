@@ -36,3 +36,11 @@ D:\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll
 D:\Biblioteca\bin\Debug\net6.0\Mapster.dll
 D:\Biblioteca\bin\Debug\net6.0\Mapster.Core.dll
 D:\Biblioteca\bin\Debug\net6.0\BCrypt.Net-Next.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Biblioteca\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Biblioteca\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Biblioteca\bin\Debug\net6.0\System.Security.Permissions.dll

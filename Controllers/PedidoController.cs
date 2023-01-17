@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Biblioteca.Dtos.Pedidos;
 using Biblioteca.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers
 {
   [ApiController]
   [Route("pedidos")]
+
   public class PedidoController : ControllerBase
   {
 
@@ -34,6 +36,7 @@ namespace Biblioteca.Controllers
       }
 
     }
+
     [HttpGet]
     public ActionResult<List<PedidoResposta>> GetPedidos()
     {
@@ -48,24 +51,27 @@ namespace Biblioteca.Controllers
       {
         return Ok(_pedidoServico.BuscarPedidoPeloId(id));
 
-      }catch(Exception e)
+      }
+      catch (Exception e)
       {
         return NotFound(e.Message);
       }
     }
-
-    [HttpDelete ("{id:int}")]
+    [Authorize]
+    [HttpDelete("{id:int}")]
     public ActionResult DeletePedido([FromRoute] int id)
     {
-      try{
+      try
+      {
         _pedidoServico.RemoverPedido(id);
         return NoContent();
-      }catch(BadHttpRequestException e)
+      }
+      catch (BadHttpRequestException e)
       {
         return BadRequest(e.Message);
 
       }
-      catch(Exception e)
+      catch (Exception e)
       {
         return NotFound(e.Message);
       }

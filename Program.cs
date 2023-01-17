@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Biblioteca.Data;
 using Biblioteca.Servicos;
 using Biblioteca.Repositorio;
+//imports feitos para a parte de autenticacao
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,8 @@ builder.Services.AddScoped<UsuarioRepositorio>();
 builder.Services.AddScoped<PedidoServico>();
 builder.Services.AddScoped<PedidoRepositorio>();
 builder.Services.AddScoped<PerfilRepositorio>();
+builder.Services.AddScoped<AutenticacaoServico>();
+
 
 builder.Services.AddDbContext<ContextoBD>(
   options =>
@@ -24,6 +30,22 @@ builder.Services.AddDbContext<ContextoBD>(
       ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ConexaoBanco"))
   )
 );
+
+//Configurações para usar Autenticação com JWT
+var JWTChave = Encoding.ASCII.GetBytes(builder.Configuration["JWTChave"]);
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(JWTChave),
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    });
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -41,6 +63,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

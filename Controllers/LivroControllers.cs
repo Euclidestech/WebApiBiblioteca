@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Biblioteca.Dtos.Livro;
 using Biblioteca.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers
@@ -48,6 +49,7 @@ namespace Biblioteca.Controllers
       }
 
     }
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteLivro([FromRoute] int id)
     {

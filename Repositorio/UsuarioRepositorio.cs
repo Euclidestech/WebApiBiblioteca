@@ -26,6 +26,7 @@ namespace Biblioteca.Repositorio
     public Usuario BuscarUsuarioPeloCpf(string cpf)
     {
       return _contexto.Usuarios.AsNoTracking()
+      .Include(u => u.Perfis)
       .FirstOrDefault(usuario => usuario.Cpf == cpf);
 
     }
@@ -37,13 +38,13 @@ namespace Biblioteca.Repositorio
       .Include(usuario => usuario.Perfis)
       .AsNoTracking().ToList();
     }
-    public Usuario BuscarPeloId(int id , bool tracking = true)
+    public Usuario BuscarPeloId(int id, bool tracking = true)
     {
       return tracking ?
       _contexto.Usuarios.Include(user => user.Endereco)
-      .Include(user => user.Perfis)
-      .FirstOrDefault(user => user.Id == id):
-      
+     .Include(user => user.Perfis)
+      .FirstOrDefault(user => user.Id == id) :
+
       _contexto.Usuarios.Include(user => user.Endereco)
       .Include(user => user.Perfis)
       .AsNoTracking().FirstOrDefault(user => user.Id == id);
@@ -55,9 +56,9 @@ namespace Biblioteca.Repositorio
       _contexto.SaveChanges();
     }
 
-    public void EditarUsuario( )
+    public void EditarUsuario()
     {
-        _contexto.SaveChanges();
+      _contexto.SaveChanges();
     }
   }
 }

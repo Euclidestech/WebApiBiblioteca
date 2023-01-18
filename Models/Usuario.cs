@@ -21,7 +21,7 @@ namespace Biblioteca.Models
     [Column(TypeName = "varchar(30)")]
     public string Nome { get; set; }
     [Required]
-    [Column(TypeName = "varchar(50)")]
+    [Column(TypeName = "varchar(60)")]
     public string Senha { get; set; }
 
     public Endereco Endereco { get; set; }

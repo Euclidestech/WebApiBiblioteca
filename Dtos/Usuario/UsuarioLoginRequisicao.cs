@@ -13,8 +13,7 @@ namespace Biblioteca.Dtos.Usuario
     [StringLength(50)]
     public string Cpf { get; set; }
 
-      [Required]
-      [StringLength(50)]
+    [Required]
     public string Senha { get; set; }
   }
 }

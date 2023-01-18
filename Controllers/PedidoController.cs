@@ -57,7 +57,7 @@ namespace Biblioteca.Controllers
         return NotFound(e.Message);
       }
     }
-    [Authorize]
+    [Authorize(Roles = "Atendente")]
     [HttpDelete("{id:int}")]
     public ActionResult DeletePedido([FromRoute] int id)
     {

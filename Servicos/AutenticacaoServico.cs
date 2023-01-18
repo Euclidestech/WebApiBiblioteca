@@ -28,12 +28,18 @@ namespace Biblioteca.Servicos
     public string Login(UsuarioLoginRequisicao usuarioLogin)
     {
       var usuario = _usuarioRepositorio.BuscarUsuarioPeloCpf(usuarioLogin.Cpf);
+      System.Console.WriteLine("aquis");
+      System.Console.WriteLine(usuario.Nome);
+
       if ((usuario is null) || (!BCrypt.Net.BCrypt.Verify(usuarioLogin.Senha, usuario.Senha)))
       {
         throw new Exception("Usuario ou senha incorretos");
       }
-      
+
+      System.Console.WriteLine("aqui2");
+
       var tokenJWT = GerarJWT(usuario);
+
       return tokenJWT;
 
 
@@ -52,16 +58,20 @@ namespace Biblioteca.Servicos
 
       var claims = new List<Claim>();
 
+      //System.Console.WriteLine(usuario.Perfis.Count);
+
       claims.Add(new Claim(ClaimTypes.Name, usuario.Nome));
       claims.Add(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
       foreach (var perfil in usuario.Perfis)
       {
+        //System.Console.WriteLine(perfil.Tipo);
         claims.Add(new Claim(ClaimTypes.Role, perfil.Tipo));
       }
       //Criando o token
       var tokenJWT = new JwtSecurityToken(
           expires: DateTime.Now.AddHours(8),
-          signingCredentials: credenciais
+          signingCredentials: credenciais,
+          claims: claims
       );
 
       //Escrevendo o token e retornando

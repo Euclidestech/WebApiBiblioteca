@@ -40,7 +40,6 @@ namespace Biblioteca.Controllers
     {
       return Ok(_usuarioServico.ListarUsuarios());
     }
-
     [HttpGet("{id:int}")]
     public ActionResult<UsuarioResposta> GetUsuario([FromRoute] int id)
     {
@@ -71,8 +70,6 @@ namespace Biblioteca.Controllers
         return NotFound(e.Message);
 
       }
-
-
     }
 
     [HttpPut("{id:int}")]
@@ -98,7 +95,7 @@ namespace Biblioteca.Controllers
     [Authorize(Roles = "Administrador")]
     [HttpPut("{usuarioId:int}/perfil/{perfilId:int}")]
     public ActionResult<UsuarioResposta> PutUsuarioPerfil([FromRoute] int usuarioId,
-    [FromRoute] int perfilId)
+     [FromRoute] int perfilId)
     {
       try
       {
@@ -131,12 +128,7 @@ namespace Biblioteca.Controllers
       catch (Exception e)
       {
         return NotFound(e.Message);
-
       }
-
     }
-
-
-
   }
 }
